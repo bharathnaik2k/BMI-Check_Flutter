@@ -59,8 +59,28 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: const EdgeInsets.all(12.0),
         child: Column(
           children: [
+            Image.asset(
+              scale: 2.5,
+              "android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png",
+            ),
+            const Text(
+              "Eat Wise,                  ",
+              style: TextStyle(
+                  fontFamily: "Lobster",
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold),
+            ),
+            const Text(
+              "          Exercise and Rise",
+              style: TextStyle(
+                fontFamily: "Lobster",
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            ),
+            const SizedBox(height: 20),
             Container(
-              padding: const EdgeInsets.all(12),
+              padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: Colors.amber,
                 borderRadius: BorderRadius.circular(5),
@@ -82,6 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(width: 5),
                   Expanded(
                     child: TextField(
+                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         fillColor: Colors.white,
                         filled: true,
@@ -100,8 +121,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
+            const SizedBox(height: 12),
             Container(
-              padding: const EdgeInsets.all(12),
+              padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: Colors.amber,
                 borderRadius: BorderRadius.circular(5),
@@ -109,20 +131,21 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Row(
                 children: [
                   const Text(
-                    "Enter Your Weight",
+                    "Enter Your Height",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(width: 12),
                   SvgPicture.asset(
-                    "assets/svg/weight.svg",
+                    "assets/svg/height.svg",
                     height: 30,
                     width: 30,
                   ),
                   const SizedBox(width: 5),
                   Expanded(
                     child: TextField(
+                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         fillColor: Colors.white,
                         filled: true,
@@ -130,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           right: 16,
                           left: 16,
                         ),
-                        hintText: "Kg",
+                        hintText: "Cm",
                         border: OutlineInputBorder(
                           borderSide: BorderSide.none,
                           borderRadius: BorderRadius.circular(5),
@@ -140,6 +163,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ],
               ),
+            ),
+            TextButton(
+              style: const ButtonStyle(
+                fixedSize: MaterialStatePropertyAll(
+                  Size(double.infinity, 20),
+                ),
+              ),
+              onPressed: () {},
+              child: const Text("Check"),
             ),
           ],
         ),
