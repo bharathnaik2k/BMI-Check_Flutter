@@ -13,11 +13,41 @@ class _HomeScreenState extends State<HomeScreen> {
   TextEditingController heightcontroller = TextEditingController();
 
   double? bmiData;
+  String? bmiNote;
+  String? bmiImage;
+  Color? bmiColor;
 
   calculate() {
-    double height = (int.parse(heightcontroller.text).toInt() / 100) * 2;
-    double result = int.parse(weightcontroller.text).toInt() / height;
-    bmiData = result;
+    double height = (double.parse(heightcontroller.text).toInt() / 100) * 2;
+    double result = double.parse(weightcontroller.text).toInt() / height;
+    setState(() {
+      bmiData = result;
+      note();
+    });
+  }
+
+  note() {
+    if (bmiData! < 18.5) {
+      bmiNote = "Under Weight";
+      bmiImage = "assets/svg/underweight.svg";
+      bmiColor = Colors.amber;
+    } else if (bmiData! >= 18.5 && bmiData! < 24.9) {
+      bmiNote = "Normal Weight";
+      bmiImage = "assets/svg/normalweight.svg";
+      bmiColor = Colors.greenAccent;
+    } else if (bmiData! >= 25.0 && bmiData! < 29.9) {
+      bmiNote = "Over Weight";
+      bmiImage = "assets/svg/overweightt.svg";
+      bmiColor = Colors.redAccent;
+    } else if (bmiData! >= 30.0 && bmiData! < 39.9) {
+      bmiNote = "Obesity";
+      bmiImage = "assets/svg/obesity.svg";
+      bmiColor = Colors.red;
+    } else if (bmiData! > 40.0) {
+      bmiNote = "Severe Obesity";
+      bmiImage = "assets/svg/severeobesity.svg";
+      bmiColor = Colors.red;
+    }
   }
 
   @override
@@ -46,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
               "I",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 255, 122, 113),
+                color: Color.fromARGB(255, 255, 94, 0),
               ),
             ),
             Text(
@@ -199,6 +229,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           weightcontroller.text.isNotEmpty) {
                         setState(() {
                           calculate();
+                          // note();
+                          FocusScope.of(context).unfocus();
                         });
                       }
                     },
@@ -212,45 +244,53 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             const SizedBox(height: 5),
             const Text(
-              "Healthy BMI Range : 18.5 kg/m² - 25 kg/m²",
+              "* Healthy BMI Range : 18.5 kg/m² - 25 kg/m²",
               style: TextStyle(
-                color: Color.fromARGB(255, 0, 145, 5),
+                color: Color.fromARGB(255, 0, 77, 3),
                 fontStyle: FontStyle.italic,
                 fontWeight: FontWeight.bold,
-                fontSize: 12,
+                fontSize: 11,
               ),
             ),
             const SizedBox(height: 15),
-            Container(
-              width: 160,
-              height: 160,
-              decoration: const BoxDecoration(),
-              child: Stack(
-                children: [
-                  Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+            bmiData == null
+                ? const SizedBox()
+                : Container(
+                    width: 160,
+                    height: 160,
+                    decoration: const BoxDecoration(),
+                    child: Stack(
                       children: [
-                        Text(
-                          bmiData!.toStringAsFixed(2),
-                          style: const TextStyle(
-                            fontSize: 48,
-                            fontWeight: FontWeight.bold,
+                        Opacity(
+                          opacity: 0.2,
+                          child: SvgPicture.asset(
+                            "$bmiImage",
                           ),
                         ),
-                         Text("data")
+                        Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                bmiData!.toStringAsFixed(2),
+                                style: TextStyle(
+                                  fontSize: 48,
+                                  color: bmiColor,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                bmiNote == null ? "" : bmiNote!.toString(),
+                                style: TextStyle(
+                                  color: bmiColor,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   ),
-                  Opacity(
-                    opacity: 0.2,
-                    child: SvgPicture.asset(
-                      "assets/svg/normalweight.svg",
-                    ),
-                  ),
-                ],
-              ),
-            ),
           ],
         ),
       ),
