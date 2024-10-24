@@ -1,3 +1,7 @@
+import 'package:bmi_check_app/widgets/homescreen_widgets/app_bar.dart';
+import 'package:bmi_check_app/widgets/homescreen_widgets/bmislogan.dart';
+import 'package:bmi_check_app/widgets/homescreen_widgets/healthy_bmi_range.dart';
+import 'package:bmi_check_app/widgets/homescreen_widgets/inputtiles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -18,280 +22,163 @@ class _HomeScreenState extends State<HomeScreen> {
   Color? bmiColor;
 
   calculate() {
-    double height = (double.parse(heightcontroller.text).toInt() / 100) * 2;
-    double result = double.parse(weightcontroller.text).toInt() / height;
+    double height =
+        (double.parse(heightcontroller.text.trim()).toInt() / 100) * 2;
+    double result = double.parse(weightcontroller.text.trim()).toInt() / height;
     setState(() {
       bmiData = result;
-      note();
+      resultData();
     });
   }
 
-  note() {
-    if (bmiData! < 18.5) {
+  resultData() {
+    if (bmiData! >= 1 && bmiData! < 18.5) {
       bmiNote = "Under Weight";
       bmiImage = "assets/svg/underweight.svg";
-      bmiColor = Colors.amber;
+      bmiColor = const Color.fromARGB(255, 165, 124, 0);
     } else if (bmiData! >= 18.5 && bmiData! < 24.9) {
       bmiNote = "Normal Weight";
       bmiImage = "assets/svg/normalweight.svg";
-      bmiColor = Colors.greenAccent;
+      bmiColor = const Color.fromARGB(255, 0, 148, 22);
     } else if (bmiData! >= 25.0 && bmiData! < 29.9) {
       bmiNote = "Over Weight";
-      bmiImage = "assets/svg/overweightt.svg";
-      bmiColor = Colors.redAccent;
+      bmiImage = "assets/svg/overweight.svg";
+      bmiColor = const Color.fromARGB(255, 146, 81, 81);
     } else if (bmiData! >= 30.0 && bmiData! < 39.9) {
       bmiNote = "Obesity";
       bmiImage = "assets/svg/obesity.svg";
-      bmiColor = Colors.red;
-    } else if (bmiData! > 40.0) {
+      bmiColor = const Color.fromARGB(255, 150, 57, 50);
+    } else if (bmiData! >= 40.0) {
       bmiNote = "Severe Obesity";
       bmiImage = "assets/svg/severeobesity.svg";
-      bmiColor = Colors.red;
+      bmiColor = const Color.fromARGB(255, 133, 9, 0);
+    } else {
+      bmiData = 0;
+      bmiColor = Colors.black;
+      bmiNote = "Enter correct value";
+      bmiImage = "assets/svg/exclamation.svg";
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 192, 122, 0),
-        title: const Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "B",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 112, 255, 117),
-              ),
-            ),
-            Text(
-              "M",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 255, 241, 90),
-              ),
-            ),
-            Text(
-              "I",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 255, 94, 0),
-              ),
-            ),
-            Text(
-              " CHECK",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-          ],
-        ),
-        centerTitle: true,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(15),
-            bottomRight: Radius.circular(15),
-          ),
-        ),
-      ),
+      appBar: appBar(),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Image.asset(
-              scale: 2.5,
-              "android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png",
-            ),
-            const Text(
-              "Eat Wise,                  ",
-              style: TextStyle(
-                  fontFamily: "Lobster",
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
-            ),
-            const Text(
-              "          Exercise and Rise",
-              style: TextStyle(
-                fontFamily: "Lobster",
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            children: [
+              Image.asset(
+                scale: 2.5,
+                "android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png",
               ),
-            ),
-            const SizedBox(height: 15),
-            Container(
-              padding: const EdgeInsets.all(14.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: const Color.fromARGB(255, 192, 122, 0),
-              ),
-              child: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Row(
-                      children: [
-                        SvgPicture.asset(
-                          "assets/svg/weight.svg",
-                          height: 26,
-                          width: 26,
+              bmiSlogan("Eat Wise,                  "),
+              bmiSlogan("          Exercise and Rise"),
+              const SizedBox(height: 15),
+              Container(
+                padding: const EdgeInsets.all(14.0),
+                decoration: BoxDecoration(
+                  boxShadow: const [
+                    BoxShadow(
+                      spreadRadius: 0.1,
+                      blurRadius: 10,
+                      color: Color.fromARGB(255, 0, 0, 0),
+                    )
+                  ],
+                  borderRadius: BorderRadius.circular(15),
+                  color: const Color.fromARGB(255, 255, 162, 0),
+                ),
+                child: Column(
+                  children: [
+                    inputTile(weightcontroller, "assets/svg/weight.svg",
+                        "Enter Your Weight :", "kg"),
+                    const SizedBox(height: 12),
+                    inputTile(heightcontroller, "assets/svg/height.svg",
+                        "Enter Your height  :", "cm"),
+                    const SizedBox(height: 12),
+                    TextButton(
+                      style: const ButtonStyle(
+                        minimumSize: MaterialStatePropertyAll(
+                          Size(180, 40),
                         ),
-                        const SizedBox(width: 12),
-                        const Text(
-                          "Enter Your Weight :",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
+                        backgroundColor: MaterialStatePropertyAll(
+                          Color.fromARGB(255, 0, 145, 5),
                         ),
-                        const SizedBox(width: 5),
-                        Expanded(
-                          child: TextField(
-                            controller: weightcontroller,
-                            keyboardType: TextInputType.number,
-                            decoration: InputDecoration(
-                              fillColor: Colors.grey.shade300,
-                              filled: true,
-                              contentPadding: const EdgeInsets.only(
-                                right: 16,
-                                left: 16,
-                              ),
-                              hintText: "Kg",
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Row(
-                      children: [
-                        SvgPicture.asset(
-                          "assets/svg/height.svg",
-                          height: 26,
-                          width: 26,
-                        ),
-                        const SizedBox(width: 12),
-                        const Text(
-                          "Enter Your Height  :",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(width: 5),
-                        Expanded(
-                          child: TextField(
-                            controller: heightcontroller,
-                            keyboardType: TextInputType.number,
-                            decoration: InputDecoration(
-                              fillColor: Colors.grey.shade300,
-                              filled: true,
-                              contentPadding: const EdgeInsets.only(
-                                right: 16,
-                                left: 16,
-                              ),
-                              hintText: "Cm",
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  TextButton(
-                    style: const ButtonStyle(
-                      minimumSize: MaterialStatePropertyAll(
-                        Size(180, 40),
                       ),
-                      backgroundColor: MaterialStatePropertyAll(
-                        Color.fromARGB(255, 0, 145, 5),
+                      onPressed: () {
+                        if (heightcontroller.text.isNotEmpty &&
+                            weightcontroller.text.isNotEmpty) {
+                          if (heightcontroller.text.startsWith('.') ||
+                              weightcontroller.text.startsWith('.')) {
+                          } else {
+                            setState(() {
+                              calculate();
+                              FocusScope.of(context).unfocus();
+                            });
+                          }
+                        }
+                      },
+                      child: const Text(
+                        "Check",
+                        style: TextStyle(color: Colors.white),
                       ),
                     ),
-                    onPressed: () {
-                      if (heightcontroller.text.isNotEmpty &&
-                          weightcontroller.text.isNotEmpty) {
-                        setState(() {
-                          calculate();
-                          // note();
-                          FocusScope.of(context).unfocus();
-                        });
-                      }
-                    },
-                    child: const Text(
-                      "Check",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(height: 5),
-            const Text(
-              "* Healthy BMI Range : 18.5 kg/m² - 25 kg/m²",
-              style: TextStyle(
-                color: Color.fromARGB(255, 0, 77, 3),
-                fontStyle: FontStyle.italic,
-                fontWeight: FontWeight.bold,
-                fontSize: 11,
-              ),
-            ),
-            const SizedBox(height: 15),
-            bmiData == null
-                ? const SizedBox()
-                : Container(
-                    width: 160,
-                    height: 160,
-                    decoration: const BoxDecoration(),
-                    child: Stack(
-                      children: [
-                        Opacity(
-                          opacity: 0.2,
-                          child: SvgPicture.asset(
-                            "$bmiImage",
-                          ),
-                        ),
-                        Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                bmiData!.toStringAsFixed(2),
-                                style: TextStyle(
-                                  fontSize: 48,
-                                  color: bmiColor,
-                                  fontWeight: FontWeight.bold,
-                                ),
+              const SizedBox(height: 12),
+              healthyBmiRange(),
+              const SizedBox(height: 12),
+              bmiData == null
+                  ? const SizedBox()
+                  : Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        boxShadow: const [
+                          BoxShadow(
+                            spreadRadius: 0.1,
+                            blurRadius: 10,
+                            color: Color.fromARGB(255, 0, 0, 0),
+                          )
+                        ],
+                        color: Colors.grey.shade200,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              overflow: TextOverflow.ellipsis,
+                              bmiData!.toStringAsFixed(2),
+                              style: TextStyle(
+                                fontSize: 55,
+                                color: bmiColor,
+                                fontWeight: FontWeight.bold,
                               ),
-                              Text(
-                                bmiNote == null ? "" : bmiNote!.toString(),
-                                style: TextStyle(
-                                  color: bmiColor,
-                                ),
-                              )
-                            ],
-                          ),
+                            ),
+                            Text(
+                              bmiNote.toString(),
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: bmiColor,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            SvgPicture.asset(
+                              "$bmiImage",
+                              width: 40,
+                              height: 40,
+                            ),
+                            const SizedBox(height: 18),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-          ],
+            ],
+          ),
         ),
       ),
     );
