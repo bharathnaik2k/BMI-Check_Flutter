@@ -2,8 +2,8 @@ import 'package:bmi_check_app/widgets/homescreen_widgets/app_bar.dart';
 import 'package:bmi_check_app/widgets/homescreen_widgets/bmislogan.dart';
 import 'package:bmi_check_app/widgets/homescreen_widgets/healthy_bmi_range.dart';
 import 'package:bmi_check_app/widgets/homescreen_widgets/inputtiles.dart';
+import 'package:bmi_check_app/widgets/homescreen_widgets/resultarea_container.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -97,33 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     inputTile(heightcontroller, "assets/svg/height.svg",
                         "Enter Your height  :", "cm"),
                     const SizedBox(height: 12),
-                    TextButton(
-                      style: const ButtonStyle(
-                        minimumSize: MaterialStatePropertyAll(
-                          Size(180, 40),
-                        ),
-                        backgroundColor: MaterialStatePropertyAll(
-                          Color.fromARGB(255, 0, 145, 5),
-                        ),
-                      ),
-                      onPressed: () {
-                        if (heightcontroller.text.isNotEmpty &&
-                            weightcontroller.text.isNotEmpty) {
-                          if (heightcontroller.text.startsWith('.') ||
-                              weightcontroller.text.startsWith('.')) {
-                          } else {
-                            setState(() {
-                              calculate();
-                              FocusScope.of(context).unfocus();
-                            });
-                          }
-                        }
-                      },
-                      child: const Text(
-                        "Check",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
+                    checkButton(context),
                   ],
                 ),
               ),
@@ -132,54 +106,41 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 12),
               bmiData == null
                   ? const SizedBox()
-                  : Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        boxShadow: const [
-                          BoxShadow(
-                            spreadRadius: 0.1,
-                            blurRadius: 10,
-                            color: Color.fromARGB(255, 0, 0, 0),
-                          )
-                        ],
-                        color: Colors.grey.shade200,
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              overflow: TextOverflow.ellipsis,
-                              bmiData!.toStringAsFixed(2),
-                              style: TextStyle(
-                                fontSize: 55,
-                                color: bmiColor,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              bmiNote.toString(),
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: bmiColor,
-                              ),
-                            ),
-                            const SizedBox(height: 10),
-                            SvgPicture.asset(
-                              "$bmiImage",
-                              width: 40,
-                              height: 40,
-                            ),
-                            const SizedBox(height: 18),
-                          ],
-                        ),
-                      ),
-                    ),
+                  : outputArea(bmiData!, bmiColor!, bmiNote!, bmiImage!),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  // Result Check Batton
+  TextButton checkButton(BuildContext context) {
+    return TextButton(
+      style: const ButtonStyle(
+        minimumSize: MaterialStatePropertyAll(
+          Size(180, 40),
+        ),
+        backgroundColor: MaterialStatePropertyAll(
+          Color.fromARGB(255, 0, 145, 5),
+        ),
+      ),
+      onPressed: () {
+        if (heightcontroller.text.isNotEmpty &&
+            weightcontroller.text.isNotEmpty) {
+          if (heightcontroller.text.startsWith('.') ||
+              weightcontroller.text.startsWith('.')) {
+          } else {
+            setState(() {
+              calculate();
+              FocusScope.of(context).unfocus();
+            });
+          }
+        }
+      },
+      child: const Text(
+        "Check",
+        style: TextStyle(color: Colors.white),
       ),
     );
   }
