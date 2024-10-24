@@ -71,8 +71,9 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Image.asset(
                 scale: 2.5,
-                "android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png",
+                "assets/image/logo.png",
               ),
+              const SizedBox(height: 10),
               bmiSlogan("Eat Wise,                  "),
               bmiSlogan("          Exercise and Rise"),
               const SizedBox(height: 15),
