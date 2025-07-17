@@ -23,7 +23,11 @@
 
 </h1>
 
-
+<h1 align="center" style="border-bottom: none">
+    <b style="color: white; font-weight: bold;">
+        📥 Download App 👉 <a href="https://github.com/bharathnaik2k/BMI-Check_Flutter/releases/download/Bmi_Check.apk/BMI_Check.apk" style="color: white; font-weight: bold; text-decoration: none;">Apk</a>
+    </b>
+</h1>
 
 ## BMI Project Details
 - when the app is opened it asks for weight and height
