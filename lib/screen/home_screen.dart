@@ -1,9 +1,11 @@
-import 'package:bmi_check_app/widgets/homescreen_widgets/app_bar.dart';
-import 'package:bmi_check_app/widgets/homescreen_widgets/bmislogan.dart';
-import 'package:bmi_check_app/widgets/homescreen_widgets/healthy_bmi_range.dart';
-import 'package:bmi_check_app/widgets/homescreen_widgets/inputtiles.dart';
-import 'package:bmi_check_app/widgets/homescreen_widgets/resultarea_container.dart';
+import 'package:bmi_app/controller/bmi_controller.dart';
+import 'package:bmi_app/widgets/homescreen_widgets/app_bar.dart';
+import 'package:bmi_app/widgets/homescreen_widgets/bmislogan.dart';
+import 'package:bmi_app/widgets/homescreen_widgets/healthy_bmi_range.dart';
+import 'package:bmi_app/widgets/homescreen_widgets/inputtiles.dart';
+import 'package:bmi_app/widgets/homescreen_widgets/resultarea_container.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,50 +18,6 @@ class _HomeScreenState extends State<HomeScreen> {
   TextEditingController weightcontroller = TextEditingController();
   TextEditingController heightcontroller = TextEditingController();
 
-  double? bmiData;
-  String? bmiNote;
-  String? bmiImage;
-  Color? bmiColor;
-
-  calculate() {
-    double height =
-        (double.parse(heightcontroller.text.trim()).toInt() / 100) * 2;
-    double result = double.parse(weightcontroller.text.trim()).toInt() / height;
-    setState(() {
-      bmiData = result;
-      resultData();
-    });
-  }
-
-  resultData() {
-    if (bmiData! >= 1 && bmiData! < 18.5) {
-      bmiNote = "Under Weight";
-      bmiImage = "assets/svg/underweight.svg";
-      bmiColor = const Color.fromARGB(255, 165, 124, 0);
-    } else if (bmiData! >= 18.5 && bmiData! < 24.9) {
-      bmiNote = "Normal Weight";
-      bmiImage = "assets/svg/normalweight.svg";
-      bmiColor = const Color.fromARGB(255, 0, 148, 22);
-    } else if (bmiData! >= 25.0 && bmiData! < 29.9) {
-      bmiNote = "Over Weight";
-      bmiImage = "assets/svg/overweight.svg";
-      bmiColor = const Color.fromARGB(255, 146, 81, 81);
-    } else if (bmiData! >= 30.0 && bmiData! < 39.9) {
-      bmiNote = "Obesity";
-      bmiImage = "assets/svg/obesity.svg";
-      bmiColor = const Color.fromARGB(255, 150, 57, 50);
-    } else if (bmiData! >= 40.0) {
-      bmiNote = "Severe Obesity";
-      bmiImage = "assets/svg/severeobesity.svg";
-      bmiColor = const Color.fromARGB(255, 133, 9, 0);
-    } else {
-      bmiData = 0;
-      bmiColor = Colors.black;
-      bmiNote = "Enter correct value";
-      bmiImage = "assets/svg/exclamation.svg";
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,10 +26,10 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
-            children: [
+            children: <Widget>[
               Image.asset(
-                scale: 2.5,
-                "assets/image/logo.png",
+                scale: 8,
+                "assets/image/logo512.png",
               ),
               const SizedBox(height: 10),
               bmiSlogan("Eat Wise,                  "),
@@ -80,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Container(
                 padding: const EdgeInsets.all(14.0),
                 decoration: BoxDecoration(
-                  boxShadow: const [
+                  boxShadow: const <BoxShadow>[
                     BoxShadow(
                       spreadRadius: 0.1,
                       blurRadius: 10,
@@ -91,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: const Color.fromARGB(255, 255, 162, 0),
                 ),
                 child: Column(
-                  children: [
+                  children: <Widget>[
                     inputTile(weightcontroller, "assets/svg/weight.svg",
                         "Enter Your Weight :", "kg"),
                     const SizedBox(height: 12),
@@ -105,9 +63,15 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 12),
               healthyBmiRange(),
               const SizedBox(height: 12),
-              bmiData == null
-                  ? const SizedBox()
-                  : outputArea(bmiData!, bmiColor!, bmiNote!, bmiImage!),
+              Consumer<BmiController>(builder: (context, bmiController, _) {
+                return bmiController.bmiData == null
+                    ? const SizedBox()
+                    : outputArea(
+                        bmiController.bmiData!,
+                        bmiController.bmiColor!,
+                        bmiController.bmiNote!,
+                        bmiController.bmiImage!);
+              }),
             ],
           ),
         ),
@@ -117,12 +81,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // Result Check Batton
   TextButton checkButton(BuildContext context) {
+    final bmiController = Provider.of<BmiController>(context, listen: false);
     return TextButton(
       style: const ButtonStyle(
-        minimumSize: MaterialStatePropertyAll(
+        minimumSize: WidgetStatePropertyAll(
           Size(180, 40),
         ),
-        backgroundColor: MaterialStatePropertyAll(
+        backgroundColor: WidgetStatePropertyAll(
           Color.fromARGB(255, 0, 145, 5),
         ),
       ),
@@ -132,16 +97,14 @@ class _HomeScreenState extends State<HomeScreen> {
           if (heightcontroller.text.startsWith('.') ||
               weightcontroller.text.startsWith('.')) {
           } else {
-            setState(() {
-              calculate();
-              FocusScope.of(context).unfocus();
-            });
+            bmiController.calculate(heightcontroller, weightcontroller);
+            FocusScope.of(context).unfocus();
           }
         }
       },
       child: const Text(
         "Check",
-        style: TextStyle(color: Colors.white),
+        style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
       ),
     );
   }

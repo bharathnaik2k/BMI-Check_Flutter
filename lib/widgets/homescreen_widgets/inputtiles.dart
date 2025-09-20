@@ -2,16 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 
-Container inputTile(TextEditingController weightcontroller, String svgImage,
-    String inputName, String hintText) {
+Container inputTile(
+  TextEditingController weightcontroller,
+  String svgImage,
+  String inputName,
+  String hintText,
+) {
   return Container(
     padding: const EdgeInsets.all(4),
     decoration: BoxDecoration(
-      color: Colors.white,
+      color: const Color.fromARGB(255, 255, 255, 255),
       borderRadius: BorderRadius.circular(5),
     ),
     child: Row(
-      children: [
+      children: <Widget>[
         SvgPicture.asset(
           svgImage,
           height: 26,
@@ -27,7 +31,7 @@ Container inputTile(TextEditingController weightcontroller, String svgImage,
         const SizedBox(width: 5),
         Expanded(
           child: TextField(
-            inputFormatters: [
+            inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.allow(
                 RegExp(r"[0-9.]"),
               )
@@ -35,7 +39,7 @@ Container inputTile(TextEditingController weightcontroller, String svgImage,
             controller: weightcontroller,
             keyboardType: TextInputType.number,
             decoration: InputDecoration(
-              fillColor: Colors.grey.shade300,
+              fillColor: const Color.fromARGB(255, 230, 230, 230),
               filled: true,
               contentPadding: const EdgeInsets.only(
                 right: 16,

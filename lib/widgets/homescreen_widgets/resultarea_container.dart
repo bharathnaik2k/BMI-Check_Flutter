@@ -7,20 +7,20 @@ Container outputArea(
   return Container(
     width: double.infinity,
     decoration: BoxDecoration(
-      boxShadow: const [
+      boxShadow: const <BoxShadow>[
         BoxShadow(
           spreadRadius: 0.1,
           blurRadius: 10,
           color: Color.fromARGB(255, 0, 0, 0),
         )
       ],
-      color: Colors.grey.shade200,
+      color: const Color.fromARGB(255, 240, 240, 240),
       borderRadius: BorderRadius.circular(15),
     ),
     child: Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+        children: <Widget>[
           Text(
             overflow: TextOverflow.ellipsis,
             bmiData.toStringAsFixed(2),

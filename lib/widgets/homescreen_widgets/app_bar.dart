@@ -5,11 +5,11 @@ AppBar appBar() {
     backgroundColor: const Color.fromARGB(255, 229, 145, 0),
     title: Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [
+      children: <Widget>[
         titleText("B", const Color.fromARGB(255, 0, 255, 8)),
         titleText("M", const Color.fromARGB(255, 255, 224, 46)),
         titleText("I", const Color.fromARGB(255, 172, 0, 0)),
-        titleText(" CHECK", Colors.white),
+        titleText(" CHECK", const Color.fromARGB(255, 255, 255, 255)),
       ],
     ),
     centerTitle: true,

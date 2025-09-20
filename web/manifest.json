@@ -1,6 +1,6 @@
 {
-    "name": "bmi_check_app",
-    "short_name": "bmi_check_app",
+    "name": "bmi_app",
+    "short_name": "bmi_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
