@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-    <h1 align="center">BMI Check</h1>
+    <h1 align="center">Self BMI</h1>
     <h4 align="center">Male and Female between 2 years to 120 years can check BMI Here</h4>
 
 <h3 align="center"> Here’s a BMI (Body Mass Index) chart for both males and females. BMI is calculated based on weight (kg) and height (m²) and is the same for males and females, although body composition can differ. The categories for BMI interpretation are the same for both genders.</h3>
@@ -24,8 +24,14 @@
 </h1>
 
 <h1 align="center" style="border-bottom: none">
-    <b style="color: white; font-weight: bold;">
-        📥 Download App 👉 <a href="https://github.com/bharathnaik2k/BMI-Check_Flutter/releases/download/Bmi_Check.apk/BMI_Check.apk" style="color: white; font-weight: bold; text-decoration: none;">Apk</a>
+    <b style="color: white; font-weight: bold;">  
+  <img 
+    src="https://static.vecteezy.com/system/resources/previews/054/650/838/non_2x/google-playstore-logo-glossy-rounded-google-playstore-logo-free-png.png" 
+    alt="Firebase" 
+    width="25" 
+  /> 
+  Download on Play store
+   <a href="https://play.google.com/store/apps/details?id=com.bnltd.bmi_app" style="color: white; font-weight: bold; text-decoration: none;">Apk</a>
     </b>
 </h1>
 
