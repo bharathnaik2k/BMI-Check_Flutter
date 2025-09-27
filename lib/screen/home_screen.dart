@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(),
+      appBar: appBar(context),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -29,11 +29,11 @@ class _HomeScreenState extends State<HomeScreen> {
             children: <Widget>[
               Image.asset(
                 scale: 8,
-                "assets/image/logo512.png",
+                'assets/image/logo512.png',
               ),
               const SizedBox(height: 10),
-              bmiSlogan("Eat Wise,                  "),
-              bmiSlogan("          Exercise and Rise"),
+              bmiSlogan('Eat Wise,                  '),
+              bmiSlogan('          Exercise and Rise'),
               const SizedBox(height: 15),
               Container(
                 padding: const EdgeInsets.all(14.0),
@@ -50,11 +50,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 child: Column(
                   children: <Widget>[
-                    inputTile(weightcontroller, "assets/svg/weight.svg",
-                        "Enter Your Weight :", "kg"),
+                    inputTile(weightcontroller, 'assets/svg/weight.svg',
+                        'Enter Your Weight :', 'kg'),
                     const SizedBox(height: 12),
-                    inputTile(heightcontroller, "assets/svg/height.svg",
-                        "Enter Your height  :", "cm"),
+                    inputTile(heightcontroller, 'assets/svg/height.svg',
+                        'Enter Your height  :', 'cm'),
                     const SizedBox(height: 12),
                     checkButton(context),
                   ],
@@ -103,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
         }
       },
       child: const Text(
-        "Check",
+        'Check',
         style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
       ),
     );

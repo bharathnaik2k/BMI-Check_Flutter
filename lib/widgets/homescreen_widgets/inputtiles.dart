@@ -33,7 +33,7 @@ Container inputTile(
           child: TextField(
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.allow(
-                RegExp(r"[0-9.]"),
+                RegExp(r'[0-9.]'),
               )
             ],
             controller: weightcontroller,
