@@ -24,9 +24,11 @@ AppBar appBar(BuildContext context) {
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 0),
         child: IconButton(
-          onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => const SettingsScreen(),
-          )),
+          onPressed: () => Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => SettingsScreen(),
+            ),
+          ),
           icon: const Icon(
             Icons.settings,
             color: Colors.white,

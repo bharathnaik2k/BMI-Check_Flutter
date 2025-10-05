@@ -4,23 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({super.key});
+class SettingsScreen extends StatelessWidget {
+  SettingsScreen({super.key});
 
-  @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
-}
-
-class _SettingsScreenState extends State<SettingsScreen> {
   final Uri _url = Uri.parse('https://www.linkedin.com/in/bharathnaik2k/');
-
-  @override
-  void initState() {
-    final settingController =
-        Provider.of<SettingsController>(context, listen: false);
-    settingController.appVersionCheck();
-    super.initState();
-  }
 
   Future<void> _launchUrl() async {
     if (!await launchUrl(_url)) {
@@ -30,6 +17,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Scaffold build(BuildContext context) {
+    final settingController =
+        Provider.of<SettingsController>(context, listen: false);
+    settingController.appVersionCheck();
     return Scaffold(
       appBar: appBar(),
       body: SafeArea(
@@ -60,10 +50,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: const SizedBox(
-        height: 50,
-        child: Center(
-          child: Text('Developed by ❤️ Bharath Naik'),
+      bottomNavigationBar: const SafeArea(
+        child: SizedBox(
+          height: 50,
+          child: Center(
+            child: Text('Developed by ❤️ Bharath Naik'),
+          ),
         ),
       ),
     );

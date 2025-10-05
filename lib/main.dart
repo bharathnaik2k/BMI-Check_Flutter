@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'exo2',
       ),
       initialRoute: '/HomeScreen',
-      routes: {'/HomeScreen': (BuildContext context) => const HomeScreen()},
+      routes: {'/HomeScreen': (BuildContext context) => HomeScreen()},
     );
   }
 }
