@@ -7,7 +7,7 @@ Text healthyBmiRange() {
       color: Color.fromARGB(255, 0, 77, 3),
       fontStyle: FontStyle.italic,
       fontWeight: FontWeight.bold,
-      fontSize: 11,
+      fontSize: 13,
     ),
   );
 }

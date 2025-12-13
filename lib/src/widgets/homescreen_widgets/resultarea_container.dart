@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 Container outputArea(
-    double bmiData, Color bmiColor, String bmiNote, String bmiImage) {
+  double bmiData,
+  Color bmiColor,
+  String bmiNote,
+  String bmiImage,
+) {
   return Container(
     width: double.infinity,
     decoration: BoxDecoration(
@@ -41,8 +45,8 @@ Container outputArea(
           const SizedBox(height: 10),
           SvgPicture.asset(
             bmiImage,
-            width: 40,
-            height: 40,
+            width: 60,
+            height: 60,
           ),
           const SizedBox(height: 18),
         ],

@@ -1,13 +1,14 @@
-import 'package:bmi_app/controller/settings_controller.dart';
-import 'package:bmi_app/widgets/settingsscreen_widgets/app_bar.dart';
+import 'package:bmi_app/src/controller/settings_controller.dart';
+import 'package:bmi_app/src/widgets/settingsscreen_widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingsScreen extends StatelessWidget {
-  SettingsScreen({super.key});
+  const SettingsScreen({super.key});
 
-  final Uri _url = Uri.parse('https://www.linkedin.com/in/bharathnaik2k/');
+  static final Uri _url =
+      Uri.parse('https://www.linkedin.com/in/bharathnaik2k/');
 
   Future<void> _launchUrl() async {
     if (!await launchUrl(_url)) {

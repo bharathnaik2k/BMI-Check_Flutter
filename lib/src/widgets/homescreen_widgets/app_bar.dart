@@ -1,4 +1,4 @@
-import 'package:bmi_app/screen/settings_screen.dart';
+import 'package:bmi_app/src/screen/settings_screen.dart';
 import 'package:flutter/material.dart';
 
 AppBar appBar(BuildContext context) {
@@ -21,20 +21,18 @@ AppBar appBar(BuildContext context) {
       ),
     ),
     actions: [
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 0),
-        child: IconButton(
-          onPressed: () => Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => SettingsScreen(),
-            ),
-          ),
-          icon: const Icon(
-            Icons.settings,
-            color: Colors.white,
+      IconButton(
+        onPressed: () => Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => const SettingsScreen(),
           ),
         ),
+        icon: const Icon(
+          Icons.settings,
+          color: Colors.white,
+        ),
       ),
+      const SizedBox(width: 8),
     ],
   );
 }

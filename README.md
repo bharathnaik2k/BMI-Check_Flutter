@@ -35,6 +35,8 @@
     </b>
 </h1>
 
+## App Version 
+
 ## BMI Project Details
 - when the app is opened it asks for weight and height
 - enter weight and height then click on check button to show your BMI
