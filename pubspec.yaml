@@ -1,7 +1,7 @@
 name: bmi_app
 description: "bnltd_bmi_app"
 publish_to: 'bnltd'
-version: 1.0.4+5
+version: 1.0.7+7
 
 environment:
   sdk: '>=3.3.4 <4.0.0'
@@ -26,6 +26,7 @@ flutter:
     - assets/svg/
     - assets/fonts/
     - assets/image/
+    - shorebird.yaml
   fonts:
     - family: exo2
       fonts:

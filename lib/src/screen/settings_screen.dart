@@ -55,7 +55,7 @@ class SettingsScreen extends StatelessWidget {
         child: SizedBox(
           height: 50,
           child: Center(
-            child: Text('Developed by ❤️ Bharath Naik'),
+            child: Text('Developed by ❤️ Bharath Naik Udupi'),
           ),
         ),
       ),

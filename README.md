@@ -54,7 +54,7 @@
 ### Here Some Sample BMI Values (Male & Female):
 sample table for heights and weights with BMI values:
 
-| Height (cm) | Weight (kg) | BMI  |Category        |
+| Height (cm) | Weight (kg) | BMI  |Category         |
 |-------------|-------------|------|-----------------|
 | 150         | 40          | 17.8 | Underweight     |
 | 160         | 50          | 19.5 | Normal weight   |
