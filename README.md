@@ -11,7 +11,7 @@
 </p>
 
 
-## App Preview
+## 👁️ App Preview
 <img src="https://github.com/bharathnaik2k/BMI-Check_Flutter/blob/main/preview.png"  />
 
 
@@ -23,19 +23,19 @@
 
 </h1>
 
-<h1 align="center" style="border-bottom: none">
-    <b style="color: white; font-weight: bold;">  
-  <img 
-    src="https://static.vecteezy.com/system/resources/previews/054/650/838/non_2x/google-playstore-logo-glossy-rounded-google-playstore-logo-free-png.png" 
-    alt="Firebase" 
-    width="25" 
-  /> 
-  Download on Play store
-   <a href="https://play.google.com/store/apps/details?id=com.bnltd.bmi_app" style="color: white; font-weight: bold; text-decoration: none;">Apk</a>
-    </b>
+
+<h1 align="center" style="border-bottom: none;">
+  Download on
+  <a href="https://play.google.com/store/apps/details?id=com.bnltd.bmi_app">
+    <img
+      src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+      height="100"
+      style="vertical-align: middle;"
+    />
+  </a>
 </h1>
 
-## App Version 
+## 📦 App Version
 
 ## BMI Project Details
 - when the app is opened it asks for weight and height
@@ -62,3 +62,29 @@ sample table for heights and weights with BMI values:
 | 180         | 80          | 24.7 | Normal weight   |
 | 190         | 95          | 26.3 | Overweight      |
 | 200         | 120         | 30.0 | Obesity Class 1 |
+.
+.
+.
+.
+.
+.
+
+
+# 🐦 Shorebird Commands
+
+## First-Time Build Using Shorebird
+Use this command to create the initial Shorebird release (base version):
+Note : use which one flutter version you are using in your project same as you are using in shorebird command otherwise it will give error ( example : your project is using flutter 3.10.0 use this Cmd : shorebird release android --flutter-version=3.10.0 )
+
+```bash
+shorebird release android --flutter-version=3.35.4
+```
+
+
+## Push Patch Update (OTA)
+Use this command to push Dart-only updates (UI, logic, text fixes)
+without uploading to the Play Store:
+
+```bash
+shorebird patch --platforms=android --release-version=1.0.7+7
+```

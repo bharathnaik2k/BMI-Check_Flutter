@@ -49,15 +49,48 @@ class HomeScreen extends StatelessWidget {
                       inputTile(
                         bmiController.weightcontroller,
                         HomeScreenAssets.weightSVG,
-                        'Enter Your Weight :',
+                        'Enter Weight :',
                         'kg',
                       ),
                       const SizedBox(height: 12),
                       inputTile(
                         bmiController.heightcontroller,
                         HomeScreenAssets.heightSVG,
-                        'Enter Your height  :',
+                        'Enter height  :',
                         'cm',
+                        suffixIcon: DropdownButton(
+                          items: const [
+                            DropdownMenuItem(
+                              value: 'kg',
+                              child: Text(
+                                'kg',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            DropdownMenuItem(
+                              value: 'lb',
+                              child: Text(
+                                'lb',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
+                          onChanged: (value) {
+                            if (value == 'kg') {
+                              bmiController.weightcontroller.text =
+                                  bmiController.weightcontroller.text
+                                      .replaceAll('lb', 'kg');
+                            } else if (value == 'lb') {
+                              bmiController.weightcontroller.text =
+                                  bmiController.weightcontroller.text
+                                      .replaceAll('kg', 'lb');
+                            }
+                          },
+                        ),
                       ),
                       const SizedBox(height: 12),
                       checkButton(context),

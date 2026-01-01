@@ -6,8 +6,9 @@ Container inputTile(
   TextEditingController weightcontroller,
   String svgImage,
   String inputName,
-  String hintText,
-) {
+  String hintText, {
+  Widget? suffixIcon,
+}) {
   return Container(
     padding: const EdgeInsets.all(4),
     decoration: BoxDecoration(
@@ -50,6 +51,7 @@ Container inputTile(
                 borderSide: BorderSide.none,
                 borderRadius: BorderRadius.circular(5),
               ),
+              suffixIcon: suffixIcon,
             ),
           ),
         ),
