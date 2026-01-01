@@ -37,7 +37,7 @@
   </a>
 </div>
 
-<h1 align="center" style="border-bottom: none;">
+<h1 align="center" style="border-bottom: none; vertical-align: middle;">
   Download on
   &nbsp;
   <a href="https://play.google.com/store/apps/details?id=com.bnltd.bmi_app">
@@ -76,12 +76,6 @@ sample table for heights and weights with BMI values:
 | 180         | 80          | 24.7 | Normal weight   |
 | 190         | 95          | 26.3 | Overweight      |
 | 200         | 120         | 30.0 | Obesity Class 1 |
-.
-.
-.
-.
-.
-.
 
 
 # 🐦 Shorebird Commands
